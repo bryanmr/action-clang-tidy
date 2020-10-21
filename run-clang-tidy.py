@@ -2,8 +2,8 @@
 
 # Run clang-tidy recursively and parallel on directory
 # Usage: run-clang-tidy sourcedir builddir excludedirs extensions
-# extensions and excludedirs are specified as comma-separated 
-# string without dot, e.g. 'c,cpp' 
+# extensions and excludedirs are specified as comma-separated
+# string without dot, e.g. 'c,cpp'
 # e.g. run-clang-tidy . build test,other c,cpp file
 
 import os, sys, subprocess, multiprocessing
@@ -13,8 +13,8 @@ failedfiles = manager.list()
 # Get absolute current path and remove trailing seperators
 currentdir = os.path.realpath(os.getcwd()).rstrip(os.sep)
 print("Arguments: " + str(sys.argv))
-# Get absolute source dir after removing leading and trailing seperators from input. 
-sourcedir = currentdir + sys.argv[1].lstrip(os.sep).rstrip(os.sep)
+# Get absolute source dir after removing leading and trailing seperators from input.
+sourcedir = os.path.normpath(os.path.join(currentdir, sys.argv[1]))
 print("Source directory: " + sourcedir)
 builddir = sourcedir + os.sep + sys.argv[2].rstrip(os.sep)
 print("Build directory: " + builddir)
