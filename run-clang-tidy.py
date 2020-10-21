@@ -52,7 +52,10 @@ pool.map(runclangtidy, collectfiles(sourcedir, excludedirs, extensions))
 pool.close()
 pool.join()
 if len(failedfiles) > 0:
-    print("Errors in " + len(failedfiles) + " files")
+    print("List of files with errors:")
+    for file in failedfiles:
+        print(file)
+    print("Errors in " + str(len(failedfiles)) + " files")
     sys.exit(1)
 print("No errors found")
 sys.exit(0)
